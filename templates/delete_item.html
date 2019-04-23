@@ -1,0 +1,16 @@
+{% extends "theme.html" %}
+{% block title %}Delete Item{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="full">
+        <h1 class="type">Are you sure you want to delete {{item.name}}?</h1>
+        <form method="POST" action="{{url_for('delete_item', item_name=item.name, category_name=category.name)}}">
+            <input name="yes" type="submit" value="Yes">
+            <a href="{{url_for('home')}}">
+                <button class="input" type="button">No</button>
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "theme.html" %}
+{% block title %}{{title}}{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="left-half">
+        <h1 class="type">Categories</h1>
+        {% for category in categories %}
+        <a href="{{url_for('view_category', category_name=category.name)}}" class="items">
+            <p>{{category.name}}</p>
+        </a>
+        {% endfor %}
+    </div>
+    <div class="right-half">
+        <h1 class="type">{{subtitle}}</h1>
+        {% for item in items %}
+        <a href="{{url_for('view_item', category_name=session.query(Category).filter_by(id=item.category_id).one().name, item_name=item.name)}}" class="items">
+            <p>{{item.name}}</p>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

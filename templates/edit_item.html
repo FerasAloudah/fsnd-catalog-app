@@ -1,0 +1,29 @@
+{% extends "theme.html" %}
+{% block title %}Update Item{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="full">
+        <h1 class="type">Update Item {{item.name}}</h1>
+        <form method="POST" action="{{url_for('edit_item', item_name=item.name, category_name=category.name)}}">
+            <label for="name">Item's Name:</label>
+            <br>
+            <input name="name" type="text" placeholder="Item's Name" value="">
+            <br>
+            <label for="description">Item's Description:</label>
+            <br>
+            <input name="description" type="text" rows="10" placeholder="Item's Description" value="">
+            <br>
+            <label for="category">Item's Category:</label>
+            <br>
+            <select name="category">
+                {% for category in categories %}
+                <option value="{{category.id}}" {% if item.category_id == category.id %} selected {% endif %}>{{category.name}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <input type="submit" value="Update">
+        </form>
+    </div>
+</div>
+{% endblock %}
