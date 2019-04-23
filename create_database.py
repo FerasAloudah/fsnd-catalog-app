@@ -55,6 +55,5 @@ class Item(Base):
         }
 
 
-def create_database(url):
-	engine = create_engine(url)
-	Base.metadata.create_all(engine)
+engine = create_engine('sqlite:///catalog.db')
+Base.metadata.create_all(engine)

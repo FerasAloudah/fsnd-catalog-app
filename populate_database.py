@@ -62,40 +62,38 @@ descriptions = [
     '''
 ]
 
+# Empty database to remove repeated categories and items.
+print('Emptying database...')
+empty_database()
+print('Done!\n')
 
-def populate_database():
-	# Empty database to remove repeated categories and items.
-	print('Emptying database...')
-	empty_database()
-	print('Done!\n')
+print('Populating database...')
 
-	print('Populating database...')
+for category in categories:
+    session.add(Category(name=category))
 
-	for category in categories:
-		session.add(Category(name=category))
-
-	session.commit()
+session.commit()
 
 
-	for item in items:
-		session.add(Item(name=item, description=random.choice(descriptions),
-						 category_id=random.randrange(len(categories))+1))
+for item in items:
+    session.add(Item(name=item, description=random.choice(descriptions),
+                     category_id=random.randrange(len(categories))+1))
 
-	session.commit()
+session.commit()
 
-	print('Done!\n')
+print('Done!\n')
 
-	print('Printing added categories and items:')
-	categories_ = session.query(Category).all()
-	items_ = session.query(Item).all()
+print('Printing added categories and items:')
+categories_ = session.query(Category).all()
+items_ = session.query(Item).all()
 
-	print('Categories: ')
-	for i, category in enumerate(categories_):
-		print('%d> %s' % (i+1, category.name))
+print('Categories: ')
+for i, category in enumerate(categories_):
+    print('%d> %s' % (i+1, category.name))
 
-	print('')
+print('')
 
-	print('Items: ')
-	for i, item in enumerate(items_):
-		print('%d> %s %s %s' % (i+1, item.name, categories[item.category_id-1],
-								item.description))
+print('Items: ')
+for i, item in enumerate(items_):
+    print('%d> %s %s %s' % (i+1, item.name, categories[item.category_id-1],
+                            item.description))
