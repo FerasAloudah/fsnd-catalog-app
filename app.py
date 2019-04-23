@@ -25,7 +25,6 @@ github_blueprint = make_github_blueprint(
 app.register_blueprint(github_blueprint, url_prefix='/login')
 
 login_manager = LoginManager(app)
-login_session['logged_in'] = False
 
 
 @login_manager.user_loader
@@ -226,4 +225,4 @@ def logout():
 if __name__ == '__main__':
     login_session['logged_in'] = current_user.is_authenticated
     app.secret_key = 'super_secret_key'
-    app.run(host="18.195.199.247.xip.io", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
